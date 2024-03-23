@@ -2,21 +2,15 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('city-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const cityInput = document.getElementById('city-input');
-    const city = cityInput.value.trim();
+    const city = {};
 
-    if (!city) {
-      return;
-    }
-
-    fetch(`/weather?city=${city}`)
+    fetch(`/weather?city=${cityInput.value.trim()}`)
       .then(response => response.json())
       .then(data => {
+        city.Place = `${data.name}, ${data.sys.country}`;
+
         const weatherDataElement = document.getElementById('weather-data');
         weatherDataElement.innerHTML = '';
-
-        const city = {
-          'Place': `${data.name}, ${data.sys.country}`
-        };
 
         const relevantData = {
           'Temperature': `${data.main.temp}°C`,
@@ -28,13 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         Object.keys(relevantData).forEach(key => {
           const div = document.createElement('div');
-          div.append(`<h2>${city['Place']}</h2>`);
+          div.append(`<h2>${city.Place}</h2>`);
           div.classList.add('weather-data-item');
           div.innerHTML = `<span>${key}:</span> ${relevantData[key]}`;
           weatherDataElement.appendChild(div);
         });
 
-        // Clear the input field after a query
+        // Clear the input field after a successful query
         cityInput.value = '';
       })
       .catch(error => {
