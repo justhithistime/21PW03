@@ -5,7 +5,7 @@ const app = express();
 
 const weatherOptions = {
   method: 'GET',
-  url: 'https://open-weather13.p.rapidapi.com/city/london',
+  url: 'https://open-weather13.p.rapidapi.com/city/',
   headers: {
     'X-RapidAPI-Key': 'fbb418a022msh7f52a387bd6d974p1615efjsnd14b1a571b85',
     'X-RapidAPI-Host': 'open-weather13.p.rapidapi.com'
