@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         Object.keys(relevantData).forEach(key => {
           const div = document.createElement('div');
-          div.add(`<h2>${city['Place']}</h2>`);
+          div.append(`<h2>${city['Place']}</h2>`);
           div.classList.add('weather-data-item');
           div.innerHTML = `<span>${key}:</span> ${relevantData[key]}`;
           weatherDataElement.appendChild(div);
